@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - groomerDB:/var/lib/mysql
+      - ./secrets:/mysecrets/secrets
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/mysecrets/secrets/groomerDB-root
+    ports:
+      - 127.0.0.1:3306:3306
+
+volumes:
+  groomerDB:
