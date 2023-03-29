@@ -3,13 +3,18 @@ services:
 
   mysql:
     image: mysql:8.0
+    secrets:
+    - groomerDB-root
     volumes:
       - groomerDB:/var/lib/mysql
-      - ./secrets:/mysecrets/secrets
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/mysecrets/secrets/groomerDB-root
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/groomerDB-root
     ports:
       - 127.0.0.1:3306:3306
 
 volumes:
   groomerDB:
+
+secrets:
+  groomerDB-root:
+    file: ./secrets/groomerDB-root
